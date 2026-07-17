@@ -4,6 +4,11 @@ import lcd, os, time, sdcard
 
 lcd.display.clear()
 
+target_mount = "/rey_sd"
+
+target_path = "/rey_sd"
+target_file = "reyette.py"
+
 def erase_text(y, h):
     lcd.display.oled.fill_rect(0, y, lcd.display.oled.width, h, 0)
     lcd.display.oled.show()
@@ -36,12 +41,12 @@ spi = SPI(2, baudrate=1000000, polarity=0, phase=0,
 
 try:
     sd = sdcard.SDCard(spi, Pin(5))
-    os.mount(sd, "/rey_sd")
+    os.mount(sd, target_mount)
     clear()
-    center("SD OK")
+    center("Mounted")
     time.sleep(1)
     clear()
-    print("SD Mounted")
+    print("Mounted")
 except Exception as e:
     clear()
     center("SD ERR")
@@ -49,12 +54,14 @@ except Exception as e:
 
 # --- try run SD boot file ---
 try:
-    if "reyette.py" in os.listdir("/rey_sd"):
-        exec(open("/rey_sd/reyette.py").read())
+    if target_file in os.listdir(target_path):
+        xpath = target_path + "/" + target_file
+        exec(open(xpath).read())
     else:
-        center("No reyette.py")
-        print("File reyette.py tidak ditemukan")
+        center(f"No {target_file}")
+        print(f"File {target_file} not found")
 except Exception as e:
     print("Exec error:", e)
     clear()
     center("Exec ERR")
+
