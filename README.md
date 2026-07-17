@@ -62,6 +62,7 @@ def main():
         ("https://zeev-x.github.io/rey_os/lcd.py", "/lcd.py"),
         ("https://zeev-x.github.io/rey_os/sdcard.py", "/sdcard.py"),
         ("https://zeev-x.github.io/rey_os/ssd1306.py", "/ssd1306.py"),
+        ("https://zeev-x.github.io/rey_os/uftp.py", "/uftp.py"),
         ("https://zeev-x.github.io/rey_os/wifi.py", "/wifi.py"),
         ("https://zeev-x.github.io/rey_os/boot.py", "/boot.py"),
     ]
