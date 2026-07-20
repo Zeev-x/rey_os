@@ -40,7 +40,7 @@ def worker(url, file_name, retries=3):
             res = urequests.get(url)
             with open(file_name, "w") as f:
                 while True:
-                    chunk = res.raw.read(512)  # baca 512 byte
+                    chunk = res.raw.read(512)
                     if not chunk:
                         break
                     f.write(chunk.decode())
@@ -48,7 +48,7 @@ def worker(url, file_name, retries=3):
             return True
         except Exception as e:
             print("Error:", e)
-            time.sleep(2)  # tunggu sebelum retry
+            time.sleep(2)
         finally:
             if res:
                 res.close()
@@ -56,15 +56,16 @@ def worker(url, file_name, retries=3):
     return False
 
 def main():
+    head_url = "https://raw.githubusercontent.com/Zeev-x/rey_os/main"
     files = [
-        ("https://zeev-x.github.io/rey_os/ap.py", "/ap.py"),
-        ("https://zeev-x.github.io/rey_os/ble.py", "/ble.py"),
-        ("https://zeev-x.github.io/rey_os/lcd.py", "/lcd.py"),
-        ("https://zeev-x.github.io/rey_os/sdcard.py", "/sdcard.py"),
-        ("https://zeev-x.github.io/rey_os/ssd1306.py", "/ssd1306.py"),
-        ("https://zeev-x.github.io/rey_os/uftp.py", "/uftp.py"),
-        ("https://zeev-x.github.io/rey_os/wifi.py", "/wifi.py"),
-        ("https://zeev-x.github.io/rey_os/boot.py", "/boot.py"),
+        (f"{head_url}/ap.py", "/ap.py"),
+        (f"{head_url}/ble.py", "/ble.py"),
+        (f"{head_url}/lcd.py", "/lcd.py"),
+        (f"{head_url}/sdcard.py", "/sdcard.py"),
+        (f"{head_url}/ssd1306.py", "/ssd1306.py"),
+        (f"{head_url}/uftp.py", "/uftp.py"),
+        (f"{head_url}/wifi.py", "/wifi.py"),
+        (f"{head_url}/boot.py", "/boot.py"),
     ]
 
     for url, path in files:
